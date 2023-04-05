@@ -15,20 +15,38 @@ const Form = () => {
 
 
   const nameChangeHandler=(e)=>{
-    const {name,value}=e.target;
-    setEnteredName((prev)=>{
-      return {...prev,[name]:value}
-    })
+    setEnteredName(e.target.value)
+  }
+  const ImageChangeHandler=(e)=>{
+    setEnteredImage(e.target.value)
+  }
+  const AuthorChangeHandler=(e)=>{
+    setEnteredAuthor(e.target.value)
+  }
+  const DesChangeHandler=(e)=>{
+    setEnteredDes(e.target.value)
   }
 const handleSubmit=(e)=>
 {
   e.preventDefault();
   console.log(enterName);
+  console.log(enterDes);
+  console.log(enterAuthor);
   setIsSubmit(true);
   setFormErrors(validate(enterName));
-  if(enterName){
-    setList((ls)=>[...ls,enterName])
+  setFormErrors(validate(enterDes));
+  setFormErrors(validate(enterAuthor));
+  setFormErrors(validate(enterImage));
+  const data={enterName,enterDes,enterImage,enterAuthor}
+  if(enterName&&enterAuthor&&enterDes&&enterImage){
+    setList((ls)=>[...ls,data])
+    console.log(List)
+    console.log("data",data)
     setEnteredName("")
+   
+    setEnteredImage("")
+    setEnteredDes("")
+    setEnteredAuthor("")
     
   } 
 
@@ -89,7 +107,8 @@ const validate = (values) => {
                   name="image"
                   id="image"
                   class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                  onChange={nameChangeHandler}
+                  onChange={ImageChangeHandler}
+                  value={enterImage}
                 
 
                 />
@@ -104,7 +123,8 @@ const validate = (values) => {
                   name="Author"
                   id="Author"
                   class="h-10 border mt-1 rounded px-2 w-full bg-gray-50"
-                  onChange={nameChangeHandler}
+                  onChange={AuthorChangeHandler}
+                  value={enterAuthor}
                   
                 />
                   <p>{formErrors.Author}</p>
@@ -117,7 +137,8 @@ const validate = (values) => {
                   name="des"
                   id="des"
                   class="h-10 border mt-1 rounded px-2 w-full bg-gray-50"
-                  onChange={nameChangeHandler}
+                  onChange={DesChangeHandler}
+                  value={enterDes}
                 >
                   
                 </textarea>
@@ -140,12 +161,12 @@ const validate = (values) => {
       </div>
       {
         List.map((a)=>
-        <div class="border-4 border-gray-500 p-4  mx-20 rounded text-center">
-          <li>{a.name}</li>
-          <li>{a.des}</li>
-          <li>{a.Author}</li>
+        <div class="flex justify-evenly flex-wrap p-2 m-4 border-4 ">
+          <li>{a.enterName}</li>
+          <li>{a.enterDes}</li>
+          <li>{a.enterAuthor}</li>
          
-          <li>{a.image} </li> <i class="fa fa-edit font-xl" ></i><i class="fa fa-trash" ></i>
+          <li>{a.enterImage} </li> <i class="fa fa-edit font-xl" ></i><i class="fa fa-trash" ></i>
          
           
         </div>
