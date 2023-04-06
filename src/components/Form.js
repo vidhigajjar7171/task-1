@@ -2,7 +2,7 @@ import React,{useState, useEffect} from "react";
 import "./Form.css";
 
 
-const Form = () => {
+const Form = (props) => {
   const [enterName, setEnteredName] = useState("");
   const [enterImage, setEnteredImage] = useState("");
   const [enterDes, setEnteredDes] = useState("");
@@ -29,26 +29,40 @@ const Form = () => {
 const handleSubmit=(e)=>
 {
   e.preventDefault();
+ 
+  
   console.log(enterName);
   console.log(enterDes);
   console.log(enterAuthor);
-  setIsSubmit(true);
+ 
+  
   setFormErrors(validate(enterName));
   setFormErrors(validate(enterDes));
   setFormErrors(validate(enterAuthor));
   setFormErrors(validate(enterImage));
-  const data={enterName,enterDes,enterImage,enterAuthor}
-  if(enterName&&enterAuthor&&enterDes&&enterImage){
-    setList((ls)=>[...ls,data])
-    console.log(List)
-    console.log("data",data)
-    setEnteredName("")
-   
-    setEnteredImage("")
-    setEnteredDes("")
-    setEnteredAuthor("")
+  setIsSubmit(true);
+  
+  
+  const data={
+    name:enterName,
+    des:enterDes,
+    img:enterImage,
+    Auth:enterAuthor};
+
+   props.onSaveData(data)
+    setEnteredName("")  
+  setEnteredImage("")
+  setEnteredDes("")
+  setEnteredAuthor("")
+  setIsSubmit(false);
+
     
-  } 
+  // if(enterName&&enterAuthor&&enterDes&&enterImage){
+  //   setList((ls)=>[...ls,data])
+  //   console.log(List)
+  //   console.log("data",data)
+   
+  // } 
 
 }
 
@@ -58,6 +72,7 @@ useEffect(() => {
   console.log(formErrors);
   if (Object.keys(formErrors).length === 0 && isSubmit) {
     console.log(enterName);
+    
   }
 }, [formErrors]);
 
@@ -70,7 +85,9 @@ const validate = (values) => {
   if (!values.des) {
     errors.des = "discription  is required!";
   }
-  
+  if (!values.image) {
+    errors.image = "image  is required!";
+  }
   if (!values.Author) {
     errors.Author = "Author is required!";
   }
@@ -159,7 +176,7 @@ const validate = (values) => {
           </form>
         </div>
       </div>
-      {
+      {/* {
         List.map((a)=>
         <div class="flex justify-evenly flex-wrap p-2 m-4 border-4 ">
           <li>{a.enterName}</li>
@@ -171,7 +188,7 @@ const validate = (values) => {
           
         </div>
           )
-      }
+      } */}
 
      
     </>
