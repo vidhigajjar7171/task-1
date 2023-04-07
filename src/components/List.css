@@ -1,9 +1,16 @@
-.expenses-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .expenses-list__fallback {
-    color: white;
+img{
+    
+        float: left;
+        margin: 5px;
+      
+}
+#child-div {
+    margin: 20px;
     text-align: center;
+  }
+  p{
+    color:rgb(67, 13, 244)
+  }
+  span{
+    color:black
   }

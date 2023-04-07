@@ -7,15 +7,18 @@
     justify-content: center;
     
   }
-  p{
+  /* p{
     color:red
-  }
+  } */
   .blog__control label {
     font-weight: bold;
     margin-bottom: 0.5rem;
     display: block;
+    
   }
-  
+  #image{
+text-align: center;
+  }
   .blog__control input {
     font: inherit;
     padding: 0.5rem;
@@ -24,7 +27,22 @@
     width: 20rem;
     max-width: 100%;
   }
+  /* #image{
+
+    display:block;
+  width:20rem;
+  height:45px;
+
+  text-align:center;
   
+  color:#fff;
+  font-size:15px;
+  font-family:”Open Sans”,sans-serif;
+  text-transform:Uppercase;
+  font-weight:600;
+  border-radius:5px;
+  cursor:pointer;
+  } */
   .blog__actions {
     text-align: right;
   }
