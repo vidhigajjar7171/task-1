@@ -3,6 +3,7 @@ import "./List.css";
 
 const List = (props) => {
   const [deleteList, setdeletelist] = useState("");
+
   // console.log("props", props.listData.name);
 
   const deleteHandler = (id) => {
@@ -10,8 +11,30 @@ const List = (props) => {
 
     const deleteValue = [...props.listData];
     const Index = props.listData.findIndex((item) => item.id === id);
+    // console.log("delete",deleteValue)
     deleteValue.splice(Index, 1);
-    props.deleteListdata(deleteValue);
+
+    props.deleteListData(deleteValue);
+  };
+
+  const updateHandler = (id) => {
+    console.log("clicking update handler", props.listData[0]);
+
+    const updateValue = [...props.listData];
+    const Index = props.listData.findIndex((item) => item.id === id);
+    // deleteValue.splice(Index, 1);
+
+    console.log(updateValue[Index].name, updateValue[Index].Auth);
+    console.log("updatevalu", updateValue);
+    // console.log("name",Index[0].name,Index)
+    props.updateListData(updateValue[Index]);
+
+    // const handlechange = (index) => {
+    //   const newUsers = [...users];
+    //   newUsers[index].name = 'New Name';
+    //   newUsers[index].rollNo = 'New RollNo';
+    //   setUsers(newUsers);
+    // };
   };
 
   return (
@@ -21,25 +44,36 @@ const List = (props) => {
         {props.listData.map((a) => (
           <div
             id="child-div"
-            className=" overflow-hidden p-2 m-8 text-center  border-4  w-[40vw]  text-2xl "
+            className=" overflow-hidden p-2 m-8 text-center  border-4  w-[40vh]  text-2xl "
             key={a.id}
           >
             <img id="image" src={a.img} alt="blog_img" />
-            <p>name:   <span>{a.name}</span></p>
-            <br/>
-            <p>description: <span>{a.des}</span></p>
-            <br/>
-            <p>Author Name: <span>{a.Auth}</span></p>
-            <br/>
-            <span className="flex justify-end">
-              {/* <i class="fa fa-eye text-3xl p-2" aria-hidden="true"></i> */}
-              <i className="fa fa-edit text-3xl p-2"></i>
-              {/* <button className="delete" > */}
-              <i
-                className="fa fa-trash text-3xl p-2"
-                onClick={() => deleteHandler(a.id)}
-              ></i>
-            </span>
+            <p>
+              Name: <span>{a.name}</span>
+            </p>
+            <br />
+            <p>
+              Description: <span>{a.des}</span>
+            </p>
+            <br />
+            <p>
+              Author Name: <span>{a.Auth}</span>
+            </p>
+            <br />
+            <div className="flex justify-end ">
+              <span className="flex justify-end">
+                {/* <i class="fa fa-eye text-3xl p-2" aria-hidden="true"></i> */}
+                <i
+                  className="fa fa-edit text-3xl p-2"
+                  onClick={() => updateHandler(a.id)}
+                ></i>
+                {/* <button className="delete" > */}
+                <i
+                  className="fa fa-trash text-3xl p-2"
+                  onClick={() => deleteHandler(a.id)}
+                ></i>
+              </span>
+            </div>
           </div>
         ))}
       </div>
