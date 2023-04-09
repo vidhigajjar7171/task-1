@@ -5,11 +5,11 @@ const List = (props) => {
   const [deleteList, setdeletelist] = useState("");
   // console.log("props", props.listData.name);
 
-  const deleteHandler = (i) => {
+  const deleteHandler = (id) => {
     // console.log("clicking delete handler", props.listData.name);
 
     const deleteValue = [...props.listData];
-    const Index = props.listData.findIndex((item) => item.id === i);
+    const Index = props.listData.findIndex((item) => item.id === id);
     deleteValue.splice(Index, 1);
     props.deleteListdata(deleteValue);
   };
