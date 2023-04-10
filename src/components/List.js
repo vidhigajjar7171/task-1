@@ -4,14 +4,14 @@ import "./List.css";
 const List = (props) => {
   const [deleteList, setdeletelist] = useState("");
 
-  // console.log("props", props.listData.name);
+
 
   const deleteHandler = (id) => {
-    // console.log("clicking delete handler", props.listData.name);
+    
 
     const deleteValue = [...props.listData];
     const Index = props.listData.findIndex((item) => item.id === id);
-    // console.log("delete",deleteValue)
+   
     deleteValue.splice(Index, 1);
 
     props.deleteListData(deleteValue);
@@ -22,11 +22,11 @@ const List = (props) => {
 
     const updateValue = [...props.listData];
     const Index = props.listData.findIndex((item) => item.id === id);
-    // deleteValue.splice(Index, 1);
+    
 
     console.log(updateValue[Index].name, updateValue[Index].Auth);
     console.log("updatevalu", updateValue);
-    // console.log("name",Index[0].name,Index)
+   
     props.updateListData(updateValue[Index]);
 
     // const handlechange = (index) => {

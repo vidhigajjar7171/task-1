@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Form.css";
+import List from "./List.js";
 
 const Form = (props) => {
   const [enterName, setEnteredName] = useState("");
@@ -10,7 +11,47 @@ const Form = (props) => {
   const [formErrors, setFormErrors] = useState(false);
   // const [updateLists,setupdates]=useState({props.upda);
   // const[update,setUpdate]=useState(props.updateList());
-  // const [isSubmit, setIsSubmit] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [details, setdetails] = useState([]);
+  const [updateLists, setupdates] = useState("");
+  const addBlogHandler = (blog) => {
+    // console.log("add blogs");
+    // console.log(blog);
+    // if(!details){
+    //   return;
+    // }
+    setdetails([
+      ...details,
+      {
+        id: Math.random(),
+        // name:updateValue[0].name,
+        name: blog.name,
+        des: blog.des,
+        img: blog.img,
+        Auth: blog.Auth,
+      },
+    ]);
+  };
+
+  const deleteList = (deleteValue) => {
+    setdetails(deleteValue);
+  };
+  const updateList = (updateValue) => {
+    // console.log(updateValue[0].name,"name")
+    // setdetails(updateValue[0].name,updateValue[0].Auth);
+    console.log(updateValue, "updatevalues");
+    setupdates({
+      id: updateValue.id,
+      // name:updateValue[0].name,
+      name: updateValue.name,
+      des: updateValue.des,
+      img: updateValue.img,
+      Auth: updateValue.Auth,
+    });
+    console.log(updateValue.id, "id");
+  };
+  console.log("datisl", details);
+  console.log("uplist", updateLists);
   // const  [List,setList]=useState([]);
 
   // console.log("props",props.onupdate.name)
@@ -19,6 +60,7 @@ const Form = (props) => {
   //   }
   const nameChangeHandler = (e) => {
     setEnteredName(e.target.value);
+    
   };
   const ImageChangeHandler = (e) => {
     setEnteredImage(URL.createObjectURL(e.target.files[0]));
@@ -32,6 +74,7 @@ const Form = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmit(true)
 
     // console.log(enterName);
     // console.log(enterDes);
@@ -46,15 +89,15 @@ const Form = (props) => {
 
     if (
       enterName.length === 0 ||
-      enterDes === 0 ||
-      enterAuthor === 0 ||
-      enterImage === 0
+      enterDes.length === 0 ||
+      enterAuthor.length === 0 ||
+      enterImage.length === 0
     ) {
       setFormErrors(true);
       return;
     }
     setFormErrors(false);
-    if (enterName.length > 0 && enterDes.length > 0 && enterAuthor.length > 0) {
+    if (enterName.length > 0 && enterImage.length>0&& enterDes.length > 0 && enterAuthor.length > 0) {
       props.onAdd(data);
     }
 
@@ -63,24 +106,29 @@ const Form = (props) => {
     setEnteredDes("");
     setEnteredAuthor("");
     console.log(enterName);
-
+    
+    
     // if(enterName&&enterAuthor&&enterDes&&enterImage){
     //   setList((ls)=>[...ls,data])
     //   console.log(List)
     //   console.log("data",data)
 
     // }
+    setIsSubmit(false)
+    
+    
   };
+  const updatetion=(e)=>{
+    // e.preventDefault();
+    setEnteredName(props.onupdates.name);
+    setEnteredImage(props.onupdates.img);
+    setEnteredDes(props.onupdates.des);
+    setEnteredAuthor(props.onupdates.Auth);
 
-  // const updatation=(updateValue)=>{
-  //   console.log("name",updateValue.name)
-  //  setEnteredName(updateValue.name)
-  //  setEnteredAuthor(updateValue.Auth)
-  //  setEnteredDes(updateValue.des)
-  //  console.log("insinde updation")
+  }
 
-  // }
-  // console.log(propsupdatation,"form data")
+//  props.onupdates(updatetion)
+console.log(props.onupdates,"names")
 
   return (
     <>
@@ -88,6 +136,7 @@ const Form = (props) => {
         <div className=" max-w-screen-lg ml-[250px]">
           <form
             className=" bg-gray-300  border-4 border-blue-500 rounded"
+            // onSubmit= {isSubmit===true? handleSubmit : updatetion}
             onSubmit={handleSubmit}
           >
             <h1 className="font-semibold text-center  p-4  text-7xl text-gray-600">
@@ -178,6 +227,11 @@ const Form = (props) => {
           </form>
         </div>
       </div>
+      <List
+        listData={details}
+        deleteListData={deleteList}
+        updateListData={updateList}
+      />
       {/* {
         List.map((a)=>
         <div className="flex justify-evenly flex-wrap p-2 m-4 border-4 ">
